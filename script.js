@@ -15,7 +15,7 @@ function aleatoire(max){
   var numbre = parseInt(Math.random()*max)
   return numbre
 }
-function creer(titres,questions,reponses,div,nom,types,id,site,points,tricher,chancePoints){
+function creer(titres,questions,reponses,div,nom,types,id,site,points,tricher,chancePoints,images){
     //Cette fonction créer un questionnaire avec les paramètres données, comme le titres, les questions, les réponses, le type de questions, etc
       /*pour se faire on voit premièrement si l'utilisateur a le droit de tricher pour cette question, si tricher == true ou tricher == false alors la question est choisi aleatoirement*/ 
   var questionChoisi = aleatoire(questions.length)
@@ -29,15 +29,19 @@ function creer(titres,questions,reponses,div,nom,types,id,site,points,tricher,ch
       var reponse = reponses[questionChoisi]
       var type = types[questionChoisi]
       var titre = titres[questionChoisi]
+      var image = images[questionChoisi]
       var question2 = questions[questionChoisi2]
       var reponse2 = reponses[questionChoisi2]
       var type2 = types[questionChoisi2]
       var titre2 = titres[questionChoisi2]
+      var image2 = images[questionChoisi2]
     /*Je créer un div appeler affiche qui va contenir tout, soit le titres, la question, les indices si l'utilisateur en a droit et etc*/ 
   var affiche = document.getElementById(div);
     /*J'ajoute le titre à tout*/ 
-  var tout = titre + "<br>"
-  var tout2 = titre2 + "<br>"
+    var tout = "<img src='"+image[0]+"' class='photo' width='"+image[1]+"'><br>"
+   tout += titre + "<br>"
+    var tout2 = "<img src='"+image2[0]+"' class='photo' width='"+image2[1]+"'><br>"
+   tout2 += titre2 + "<br>"
     /*Si le type de question est une checkbox, un radio ou un select, il faut y avoir un radio/select/checkbox par réponse possible*/ 
   if ((type =='checkbox') ||(type =='radio') ||(type =='select')){
       /*je créer un radio/select/checkbox par réponse possible*/ 
@@ -103,7 +107,7 @@ function creer(titres,questions,reponses,div,nom,types,id,site,points,tricher,ch
       }
     /*Je créer un bouton qui accomplis la fonction soumis quand il est cliquer et cette fonction regarde à la réponse et dit à l'utilisateur si il/elle à la bonne réponse*/ 
     var toutEleve = tout
-   tout += "<br><input type ='button' onclick=soumis('"+reponse+"','"+nom+"','"+div+"','"+id+"','"+type+"','"+site+"','"+points+"',0); value = 'Soumettre'>"
+   tout += "<br><input type ='button' onclick=soumis('"+reponse+"','"+nom+"','"+div+"','"+id+"','"+type+"','"+site+"','"+points+"',0,'"+image+"'); value = 'Soumettre'>"
     var toutnon = tout
     var toutEnseignant = tout
     if (tricher==true){
@@ -177,7 +181,7 @@ function creer(titres,questions,reponses,div,nom,types,id,site,points,tricher,ch
     }
  affiche.innerHTML = tout
 }
-function soumis(reponse,nom,div,id,type,site,points,indicePoints){
+function soumis(reponse,nom,div,id,type,site,points,indicePoints,image){
     /*Je définis bonneRep, sois les bonnes réponses et mauvaiseRep, soit les mauvaises réponse à zéro*/ 
   var bonneRep = 0;
   var mauvaiseRep = 0;
@@ -262,7 +266,9 @@ if (site=="annee2.html"){
         }
     }
     /*Je créer le message qui dit à l'utilisateur combien de bonneRep il y a eu, combien de bonne réponses il/elle y a, combien de mauvaise réponses il/elle a eu, combien de point il/elle ont eu et combien de points il/elle on maintenant ainsi que leur moyenne*/
-var message = "Vous avez "+bonneRep+"/"+bonneRepTotal+" bonne réponse et "+mauvaiseRep+" mauvaise réponse"
+    image = image.split(",")
+    var message =  "<img src='"+image[0]+"' class='photo' width='"+image[1]+"'><br>"
+ message +=  "Vous avez "+bonneRep+"/"+bonneRepTotal+" bonne réponse et "+mauvaiseRep+" mauvaise réponse"
     if (pointTrouver==pointTrouverTricher){
  message+= "<br>Tu as recu " + pointTrouver+" points. Tu as maintenant "+ utilisateurScore + "/" + maxScore + "point. Tu as une moyennes de " + pourcentage + "%";
     } else {
