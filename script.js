@@ -156,11 +156,11 @@ function creer(titres,questions,reponses,div,nom,types,id,site,points,tricher,ch
     }
     
     if(chanceEleve<chance){
-        toutEleve += "<br><input type ='button' onclick=soumis('"+reponse+"','"+nom+"','"+div+"','"+id+"','"+type+"','"+site+"','"+points+"',"+pointEleve+"); value = 'Soumettre'>"
+        toutEleve += "<br><input type ='button' onclick=soumis('"+reponse+"','"+nom+"','"+div+"','"+id+"','"+type+"','"+site+"','"+points+"',"+pointEleve+",'"+image+"'); value = 'Soumettre'>"
         toutReponse +=" mais tu m'en doit une"
         toutEleve += "<br>"+toutReponse
     } else {
-        toutEleve += "<br><input type ='button' onclick=soumis('"+reponse+"','"+nom+"','"+div+"','"+id+"','"+type+"','"+site+"','"+points+"',0); value = 'Soumettre'>"
+        toutEleve += "<br><input type ='button' onclick=soumis('"+reponse+"','"+nom+"','"+div+"','"+id+"','"+type+"','"+site+"','"+points+"',0,'"+image+"'); value = 'Soumettre'>"
         aucuneChanceEleve = aleatoire(3)
         if (aucuneChanceEleve==0){
                 aucuneChanceEleve = "<br>Pourquoi je te dirais la réponses, tu ne m'a jamais aider"
@@ -173,7 +173,7 @@ function creer(titres,questions,reponses,div,nom,types,id,site,points,tricher,ch
     }
     localStorage.setItem("toutEleve",toutEleve)
     localStorage.setItem("toutEnseignant",toutEnseignant)
-    tout2 += "<br><input type ='button' onclick=soumis('"+reponse2+"','"+nom+"','"+div+"','"+id+"','"+type2+"','"+site+"','"+points+"',"+pointChanger+"); value = 'Soumettre'>"
+    tout2 += "<br><input type ='button' onclick=soumis('"+reponse2+"','"+nom+"','"+div+"','"+id+"','"+type2+"','"+site+"','"+points+"',"+pointChanger+",'"+image+"'); value = 'Soumettre'>"
     if (chanceChanger<chance){
         localStorage.setItem("tout",tout2)
     } else {
